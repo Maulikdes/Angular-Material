@@ -1,0 +1,32 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="#" (click)="selectedLink = 1" >Dashboard</a>
+      <a mat-list-item href="#" (click)="selectedLink = 2" >Address Form</a>
+      <a mat-list-item href="#" (click)="selectedLink = 3" >Tree</a>
+      <a mat-list-item href="#" (click)="selectedLink = 4" >Table</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Angular-Material</span>
+    </mat-toolbar>
+    <app-form *ngIf="selectedLink == 2" ></app-form>
+    <app-dashboard *ngIf="selectedLink == 1" ></app-dashboard>
+    <app-tree *ngIf="selectedLink == 3" ></app-tree>
+    <app-table *ngIf="selectedLink == 4" ></app-table>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
